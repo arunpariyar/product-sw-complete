@@ -41,5 +41,5 @@ main()
   })
   .finally(async () => {
     await prisma.$disconnect();
-    console.log("Database seeded successfully 🌱");
+    console.info("Database seeded successfully 🌱");
   });
