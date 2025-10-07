@@ -1,6 +1,4 @@
-// prisma/seed.ts
-import { PrismaClient } from "../app/generated/prisma/index.js"; // <-- adjust relative path
-
+import { PrismaClient } from "../app/generated/prisma/index.js";
 const prisma = new PrismaClient();
 
 import type { ProductCreateInput } from "../types/product";
@@ -8,8 +6,9 @@ import type { ProductCreateInput } from "../types/product";
 const url =
   "https://raw.githubusercontent.com/wedeploy-examples/supermarket-web-example/master/products.json";
 
+//function to remove null bytes while reading json
 function sanitizeString(str: string): string {
-  return str.replace(/\0/g, ""); // remove null bytes
+  return str.replace(/\0/g, "");
 }
 
 async function main() {

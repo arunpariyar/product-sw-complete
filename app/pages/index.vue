@@ -18,6 +18,7 @@ const searchParams = computed(() =>
   buildSearchParams(query.value, selectedCategory.value)
 );
 
+//search items after user selection
 async function queryItems() {
   try {
     const searchResults = await $fetch<Product[]>(
@@ -30,7 +31,9 @@ async function queryItems() {
 }
 </script>
 <template>
-  <div class="w-full flex justify-center items-center gap-5 mb-10 pt-10">
+  <div
+    class="w-full flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-5 mb-10 pt-10"
+  >
     <input
       class="border border-blue-500 p-2 rounded"
       type="text"

@@ -12,7 +12,6 @@ export interface Product {
   updatedAt: Date;
 }
 
-// For seeding / creation input
 export type ProductCreateInput = Omit<
   Product,
   "id" | "createdAt" | "updatedAt"
