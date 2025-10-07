@@ -1,6 +1,6 @@
-# Nuxt Minimal Starter
+# Basic Nuxt Product App
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+The Product app implements both next client and server to implement a minimal product search and listing app.
 
 ## Setup
 
@@ -9,67 +9,30 @@ Make sure to install dependencies:
 ```bash
 # npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
 ## Development Server
 
-Start the development server on `http://localhost:3000`:
-
 ```bash
 # npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+open the project url on browser
 
-Build the application for production:
+## Demo (GIF)
 
-```bash
-# npm
-npm run build
+# Frontend
 
-# pnpm
-pnpm build
+![Frontend](./info//Frontend-demo.gif)
 
-# yarn
-yarn build
+# Backend
 
-# bun
-bun run build
-```
+![Backend](./info/Backend-demo.gif)
 
-Locally preview production build:
+## Tools used
 
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- Nuxt 4
+- Nuxt Server
+- PrismaORM
+- TailwindCSS
