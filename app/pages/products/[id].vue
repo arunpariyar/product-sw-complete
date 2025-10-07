@@ -10,21 +10,29 @@ const { data: product } = await useFetch<Product>(`/api/products/${productId}`);
 </script>
 
 <template>
-  <div v-if="product">
+  <div class="p-5" v-if="product ">
     <div>
-      <NuxtLink to="/">back</NuxtLink>
-      <p>{{ product.title }}</p>
+      <NuxtLink class="uppercase text-md" to="/">&#8592 back</NuxtLink>
+      <p class=" text-blue-500 py-5 text-lg uppercase tracking-wide">{{ product.title }}</p>
     </div>
-    <div>
+    <div class="rounded-xl">
       <img
         :src="generateImageUrl(product.filename)"
         :alt="product.description"
       />
     </div>
-    <p>{{ product.type }}</p>
-    <p>{{ product.description }}</p>
-    <p>{{ product.rating }}</p>
+
+    <p class="bg-blue-300 inline-block p-1.5 my-3 rounded-md">{{ product.type }}</p>
+    <div>
+      <span v-for="i in 5" :key="i" class="text-yellow-400">
+      {{ i <= product.rating ? '★' : '☆' }}
+      </span>
+    </div>
+    <p class="my-1 font-light w-50% text-wrap">{{ product.description }}</p>
     <p>€{{ product.price }}</p>
+
+     
   </div>
+   
   <div v-else>Product {{ productId }} not found</div>
 </template>

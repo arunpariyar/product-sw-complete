@@ -1,23 +1,21 @@
 <script setup lang="ts">
 import type { Product } from "../../types/product";
-
 const products = ref<Product[]>([]);
 const query = ref("");
 const selectedCategory = ref("all");
 
-const {
-  data: fetchedProducts,
-  pending,
-  error,
-} = await useAsyncData<Product[]>("products", () => $fetch("/api/products"));
-products.value = fetchedProducts.value ?? [];
-
-const searchParams = computed(() =>
-  buildSearchParams(query.value, selectedCategory.value)
+//getting categories
+const { data: categories } = await useFetch<{ category: String[] }>(
+  "/api/products/types"
 );
 
-const categories = computed(() =>
-  extractCategories(products.value as Product[])
+//getting all products
+const { data, pending, error } = await useFetch<Product[]>("/api/products");
+products.value = data.value ?? [];
+
+//generate search params from user-input
+const searchParams = computed(() =>
+  buildSearchParams(query.value, selectedCategory.value)
 );
 
 async function queryItems() {
@@ -42,20 +40,30 @@ async function queryItems() {
 
     <select
       v-model="selectedCategory"
-      class="border border-blue-500 p-2 rounded"
+      class="border border-blue-500 px-3 py-2 rounded"
     >
       <option value="all">all</option>
-
-      <option v-for="category in categories" key="category" :value="category">
-        {{ category }}
-      </option>
+      <ClientOnly>
+        <option
+          v-for="category in categories?.category"
+          :key="category.toString()"
+          :value="category"
+        >
+          {{ category }}
+        </option>
+      </ClientOnly>
     </select>
-    <button @click="queryItems">Search</button>
+    <button
+      class="cursor-pointer bg-blue-900 text-white px-3 py-2 rounded-md"
+      @click="queryItems"
+    >
+      Search
+    </button>
   </div>
 
   <div v-if="pending" class="text-center">Loading...</div>
   <div v-else-if="error" class="text-center text-red-500">
-    Error: {{ error.message }}
+    <p>No Products found</p>
   </div>
   <div v-else>
     <div class="flex flex-wrap gap-5 justify-center">
